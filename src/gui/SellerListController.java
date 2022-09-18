@@ -38,7 +38,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 	private SellerService service;
 
 	@FXML
-	private TableView<Seller> tableViewdepartment;
+	private TableView<Seller> tableViewSeller;
 
 	@FXML
 	private TableColumn<Seller, Integer> tableColumnId;
@@ -92,7 +92,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 		Utils.formatTableColumnDouble(tableColumnBaseSalary, 2);
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
-		tableViewdepartment.prefHeightProperty().bind(stage.heightProperty());
+		tableViewSeller.prefHeightProperty().bind(stage.heightProperty());
 	}
 
 	public void updateTableView() {
@@ -102,7 +102,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 		List<Seller> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
-		tableViewdepartment.setItems(obsList);
+		tableViewSeller.setItems(obsList);
 		initEditButtons();
 		initRemoveButtons();
 	}
@@ -113,13 +113,13 @@ public class SellerListController implements Initializable, DataChangeListener {
 			Pane pane = loader.load();
 
 			SellerFormController controller = loader.getController();
-			controller.setDeparment(obj);
-			controller.setDeparmentService(new SellerService());
+			controller.setSeller(obj);
+			controller.setSellerService(new SellerService());
 			controller.subscribeDataChangeListener(this);
 			controller.updateFormDate();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Insira os dados do Departamento");
+			dialogStage.setTitle("Insira os dados do Vendedor");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
